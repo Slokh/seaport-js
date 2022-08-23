@@ -421,7 +421,7 @@ export async function fulfillStandardOrder({
 
   const isGift = recipientAddress !== ethers.constants.AddressZero;
 
-  const useAdvanced = Boolean(unitsToFill) || hasCriteriaItems || isGift;
+  const useAdvanced = Boolean(unitsToFill) || hasCriteriaItems || isGift || extraData;
 
   const orderAccountingForTips: OrderStruct = {
     ...order,
