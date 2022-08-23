@@ -167,6 +167,7 @@ export type CreateOrderInput = {
   restrictedByZone?: boolean;
   useProxy?: boolean;
   salt?: string;
+  zoneHash?: string;
 };
 
 export type InputCriteria = {

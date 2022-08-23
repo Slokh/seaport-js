@@ -205,6 +205,7 @@ export class Seaport {
       allowPartialFills,
       restrictedByZone,
       fees,
+      zoneHash,
       salt = generateRandomSalt(),
     }: CreateOrderInput,
     accountAddress?: string
@@ -272,7 +273,7 @@ export class Seaport {
       offerer,
       zone,
       // TODO: Placeholder
-      zoneHash: formatBytes32String(resolvedCounter.toString()),
+      zoneHash: zoneHash || formatBytes32String(resolvedCounter.toString()),
       startTime,
       endTime,
       orderType,
