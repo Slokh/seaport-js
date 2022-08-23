@@ -700,30 +700,6 @@ export class Seaport {
       recipient: tip.recipient,
     }));
 
-    const isRecipientSelf = recipientAddress === ethers.constants.AddressZero;
-
-    // We use basic fulfills as they are more optimal for simple and "hot" use cases
-    // We cannot use basic fulfill if user is trying to partially fill though.
-    if (
-      !unitsToFill &&
-      isRecipientSelf &&
-      extraData == "0x" &&
-      shouldUseBasicFulfill(sanitizedOrder.parameters, totalFilled)
-    ) {
-      // TODO: Use fulfiller proxy if there are approvals needed directly, but none needed for proxy
-      return fulfillBasicOrder({
-        order: sanitizedOrder,
-        seaportContract: this.contract,
-        offererBalancesAndApprovals,
-        fulfillerBalancesAndApprovals,
-        timeBasedItemParams,
-        conduitKey,
-        offererOperator,
-        fulfillerOperator,
-        signer: fulfiller,
-        tips: tipConsiderationItems,
-      });
-    }
 
     // Else, we fallback to the standard fulfill order
     return fulfillStandardOrder({
