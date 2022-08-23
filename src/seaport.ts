@@ -700,6 +700,8 @@ export class Seaport {
       recipient: tip.recipient,
     }));
 
+    console.log(extraData)
+
 
     // Else, we fallback to the standard fulfill order
     return fulfillStandardOrder({

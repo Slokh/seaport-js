@@ -423,6 +423,9 @@ export async function fulfillStandardOrder({
 
   const useAdvanced = Boolean(unitsToFill) || hasCriteriaItems || isGift || extraData;
 
+  console.log(extraData)
+  console.log(useAdvanced)
+
   const orderAccountingForTips: OrderStruct = {
     ...order,
     parameters: {
@@ -439,8 +442,7 @@ export async function fulfillStandardOrder({
 
   const exchangeAction = {
     type: "exchange",
-    transactionMethods: useAdvanced
-      ? getTransactionMethods(
+    transactionMethods: getTransactionMethods(
           seaportContract.connect(signer),
           "fulfillAdvancedOrder",
           [
@@ -461,12 +463,7 @@ export async function fulfillStandardOrder({
             recipientAddress,
             payableOverrides,
           ]
-        )
-      : getTransactionMethods(seaportContract.connect(signer), "fulfillOrder", [
-          orderAccountingForTips,
-          conduitKey,
-          payableOverrides,
-        ]),
+        ),
   } as const;
 
   const actions = [...approvalActions, exchangeAction] as const;
